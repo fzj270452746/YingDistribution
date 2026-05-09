@@ -1,0 +1,19 @@
+Scenario: App relaunch restores latest metrics
+Code Evidence: YingDistribution/ViewModels/VermilionDashboardVM.swift:113-124; YingDistribution/Services/CarmineArchivist.swift:23-29
+Verdict: PASS
+Notes: VM init -> restoreArchived()，调用 archivist.retrieveLatest() 并恢复 quillonMetrics + insights。
+
+Scenario: App relaunch restores history list
+Code Evidence: YingDistribution/ViewModels/VermilionDashboardVM.swift:113-117; YingDistribution/Services/CarmineArchivist.swift:181-187
+Verdict: PASS
+Notes: restoreArchived() 将 history = retrieveHistory() ?? []，缺省安全回退空数组。
+
+Scenario: App relaunch restores presets list
+Code Evidence: YingDistribution/ViewModels/VermilionDashboardVM.swift:113-117; YingDistribution/Services/CarmineArchivist.swift:216-222
+Verdict: PASS
+Notes: restoreArchived() 将 presets = retrievePresets() ?? []，缺省安全回退空数组。
+
+Scenario: Dashboard first appearance rehydrates archived state
+Code Evidence: YingDistribution/Views/Screens/VermilionDashboard.swift:43-53
+Verdict: PASS
+Notes: viewDidAppear 首次进入调用 restoreArchived()；仅在无 metrics 时才触发默认模拟。

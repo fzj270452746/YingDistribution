@@ -1,0 +1,19 @@
+Task: 9
+File: YingDistribution/Views/Screens/ComparisonScreen.swift:28-31; YingDistribution/Views/Screens/ComparisonScreen.swift:145-158
+Verdict: PASS
+Notes: 支持注入 baseline/comparison 直接结果模式，也支持无参进入选择模式，构成双模式入口。
+
+Task: 9
+File: YingDistribution/Views/Screens/ComparisonScreen.swift:160-170; YingDistribution/Views/Screens/ComparisonScreen.swift:360-377
+Verdict: PASS
+Notes: 选择模式要求先后选 baseline/comparison；compareButton 仅双选完成时显示，第三次点击仅替换 comparison，维持双选限制。
+
+Task: 9
+File: YingDistribution/Views/Screens/ComparisonScreen.swift:173-224
+Verdict: PASS
+Notes: 结果模式展示 4 张核心对比卡，并在 tierSummaries 可用时追加 Tier Breakdown 差异区块。
+
+Task: 9
+File: YingDistribution/Views/Screens/ComparisonScreen.swift:319-333
+Verdict: PASS
+Notes: compareTapped 二次 guard 双选记录存在，再构造 ComparisonSnapshot 进入结果模式。

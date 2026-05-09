@@ -1,0 +1,19 @@
+Task: 6
+File: YingDistribution/Views/Screens/PresetsScreen.swift:130-156
+Verdict: PASS
+Notes: Save Current 弹窗采集 preset 名称，非空后调用 viewModel.savePreset(name:) 保存当前配置。
+
+Task: 6
+File: YingDistribution/Views/Screens/PresetsScreen.swift:147-150; YingDistribution/ViewModels/VermilionDashboardVM.swift:77-84
+Verdict: PASS
+Notes: UI 依赖 VM savePreset 返回值，重名时不刷新列表并转为错误提示。
+
+Task: 6
+File: YingDistribution/Views/Screens/PresetsScreen.swift:110-127
+Verdict: PASS
+Notes: duplicate/empty name 均有明确 alert，阻止非法保存。
+
+Task: 6
+File: YingDistribution/Views/Screens/PresetsScreen.swift:184-209
+Verdict: PASS
+Notes: didSelectRowAt 将 preset.config 载入 activeConfig；swipe Delete 调用 viewModel.deletePreset 支持加载与删除。

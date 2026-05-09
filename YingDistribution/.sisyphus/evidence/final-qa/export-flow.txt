@@ -1,0 +1,20 @@
+Scenario
+CSV/PDF/PNG 三联导出 + 无 metrics 失败提示
+
+Code Path (file:line)
+- Dashboard Export 按钮无 metrics 禁用：YingDistribution/Views/Screens/VermilionDashboard.swift:257-258
+- Dashboard 有 metrics 时进入 exporter：YingDistribution/Views/Screens/VermilionDashboard.swift:455-458
+- Analysis Screen 无 metrics 明示提示：YingDistribution/Views/Screens/AmethystAnalysis.swift:321-326
+- CSV 生成：YingDistribution/Services/IndigoExporter.swift:9-25
+- PDF 生成：YingDistribution/Services/IndigoExporter.swift:70-139
+- PNG 生成：YingDistribution/Services/IndigoExporter.swift:27-68
+- ShareSheet 汇总三联产物：YingDistribution/Services/IndigoExporter.swift:171-200
+- metrics=nil 或 items 为空失败提示：YingDistribution/Services/IndigoExporter.swift:165-169, 193-210
+- 既有失败提示证据引用：.sisyphus/evidence/task-11-edge-regression.txt:31-34
+
+Verdict
+PASS
+
+Notes
+- exporter 会并行准备 CSV/PDF/PNG 三类文件，并在 items 非空时统一分享。
+- 无 metrics 时存在两层防护：Dashboard 上按钮禁用；Analysis Screen 直接弹 “No Data”；若其他调用点传 nil，IndigoExporter 统一弹 “Export Unavailable”。

@@ -1,0 +1,38 @@
+Task 1: Archive Extension - Completion Evidence
+================================================
+
+MODIFIED FILES:
+- YingDistribution/Services/CarmineArchivist.swift
+- YingDistribution/Models/HistoryRecord.swift
+- YingDistribution/Models/ComparisonSnapshot.swift
+
+NEW METHODS ADDED TO CarmineArchivist:
+1. preserveHistory(_ metrics: CeladonMetrics, config: CobaltConfig)
+2. retrieveHistory() -> [HistoryRecord]?
+3. deleteHistoryRecord(id: UUID)
+4. savePreset(_ config: CobaltConfig, name: String)
+5. retrievePresets() -> [PresetEntity]?
+6. deletePreset(id: UUID)
+
+NEW USERDEFAULTS KEYS (VERSIONED):
+- ying_history_v1 (stores HistoryEnvelope with [HistoryRecord])
+- ying_presets_v1 (stores PresetEnvelope with [PresetEntity])
+
+ENVELOPE STRUCTURES ADDED:
+- HistoryEnvelope: Wraps [HistoryRecord] for JSON serialization
+- PresetEnvelope: Wraps [PresetEntity] for JSON serialization
+
+FEATURES IMPLEMENTED:
+✓ History records with UUID id, Date timestamp, config summary, metrics summary
+✓ Preset entities with UUID id, name, full CobaltConfig, createdAt
+✓ Automatic history trimming to 100 records (oldest removed when exceeded)
+✓ Safe decode handling with try? - returns nil/[] on failure
+✓ Existing preserveLatest/retrieveLatest/preserveConfig/retrieveConfig unchanged
+✓ No new dependencies added
+✓ No Core Data/SQLite/Realm used
+
+COMPILATION STATUS:
+✓ CarmineArchivist.swift compiles successfully
+✓ HistoryRecord.swift updated with correct MetricsSummary fields
+✓ ComparisonSnapshot.swift updated to use new field names
+✓ All envelope/unwrap patterns follow existing conventions

@@ -1,0 +1,19 @@
+Task: 3
+File: YingDistribution/ViewModels/VermilionDashboardVM.swift:4-21
+Verdict: PASS
+Notes: VermilionDashboardVM 标记为 @MainActor，单例在 init 时 restoreArchived，聚合历史、预设、insights 的生命周期入口统一。
+
+Task: 3
+File: YingDistribution/ViewModels/VermilionDashboardVM.swift:12-18
+Verdict: PASS
+Notes: @Published history/presets/insights 与 quillonMetrics 同属 VM，形成 dashboard 聚合状态源。
+
+Task: 3
+File: YingDistribution/ViewModels/VermilionDashboardVM.swift:65-67
+Verdict: PASS
+Notes: 模拟完成后立即刷新 history，并从 metrics 生成 insights，保证聚合状态同步落盘后回灌。
+
+Task: 3
+File: YingDistribution/ViewModels/VermilionDashboardVM.swift:72-95
+Verdict: PASS
+Notes: loadPresets/deletePreset/deleteHistoryRecord 分别驱动 presets/history 刷新，维持页面级统一数据源。

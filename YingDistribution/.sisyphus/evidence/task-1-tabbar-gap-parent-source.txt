@@ -1,0 +1,17 @@
+Parent container source of truth: YingDistribution/Core/MonolithNavigation.swift
+
+Lines 31-39 (relevant constraints):
+    contentContainer.topAnchor.constraint(equalTo: view.topAnchor),
+    contentContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+    contentContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+    contentContainer.bottomAnchor.constraint(equalTo: berylRibbon.topAnchor),
+
+    berylRibbon.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+    berylRibbon.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+    berylRibbon.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8),
+    berylRibbon.heightAnchor.constraint(equalToConstant: ribbonHeight)
+
+Conclusion:
+The parent contentContainer's bottom is already pinned to berylRibbon.topAnchor, which itself sits 8pt above the safe-area bottom. Tabbar space reservation is fully owned by MonolithNavigation. Child screens must NOT add their own bottom inset (-100), or the gap doubles.
+
+Child VC.view is sized to contentContainer.bounds (line 72: `newVC.view.frame = contentContainer.bounds`), so child `view.bottomAnchor` == bottom of contentContainer == top of berylRibbon. Therefore `scrollView.bottomAnchor == view.bottomAnchor` is the correct constraint.

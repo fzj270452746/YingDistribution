@@ -1,0 +1,17 @@
+Scenario
+空 history / 空 preset / 空 metrics 三态
+
+Code Path (file:line)
+- 空 history 文案与显隐：YingDistribution/Views/Screens/HistoryScreen.swift:46-52, 71-74
+- 空 preset 文案与显隐：YingDistribution/Views/Screens/PresetsScreen.swift:49-55, 74-77
+- 空 metrics 占位与禁用态：YingDistribution/Views/Screens/VermilionDashboard.swift:231-262
+- 无 insights 隐藏：YingDistribution/Views/Screens/VermilionDashboard.swift:267-276
+- Analysis 空 metrics 文案：YingDistribution/Views/Screens/AmethystAnalysis.swift:197-200, 305-307
+- 既有空态证据引用：.sisyphus/evidence/task-11-edge-regression.txt:1-14
+
+Verdict
+PASS
+
+Notes
+- 空 history 与空 preset 都由 emptyStateLabel 控制，文案明确。
+- 空 metrics 时 Dashboard 指标显示 “—”，Export disabled，Compare 在 history<2 时 disabled，Insights 隐藏；Analysis 页也显示 “Run a simulation to see tier analysis”。

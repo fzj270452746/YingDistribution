@@ -1,0 +1,19 @@
+Task: 10
+File: YingDistribution/Views/Screens/VermilionDashboard.swift:231-265
+Verdict: PASS
+Notes: refreshPanels 统一刷新 dashboard 指标卡、tier breakdown、compare/export 按钮禁用态及 insight 区。
+
+Task: 10
+File: YingDistribution/Views/Screens/VermilionDashboard.swift:232-255
+Verdict: PASS
+Notes: 无 metrics 时四张卡展示占位符，tier 区块展示 "No tier breakdown yet"，覆盖 dashboard 空态。
+
+Task: 10
+File: YingDistribution/Views/Screens/VermilionDashboard.swift:257-262
+Verdict: PASS
+Notes: Export 在无 metrics 时 disabled(alpha 0.4)；Compare 在 history<2 时 disabled(alpha 0.4)。
+
+Task: 10
+File: YingDistribution/Views/Screens/VermilionDashboard.swift:43-53; YingDistribution/Views/Screens/AmethystAnalysis.swift:193-223
+Verdict: PASS
+Notes: Dashboard 首次出现 restoreArchived 后 refreshPanels；Analysis 页面也提供 refreshPanels，整体页面集成刷新链路完整。

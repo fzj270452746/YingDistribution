@@ -1,0 +1,14 @@
+Task: 7
+File: YingDistribution/ViewModels/VermilionDashboardVM.swift:126-202
+Verdict: PASS
+Notes: generateInsights 基于 RTP、命中率、峰值倍率与 tier concentration 规则生成 InsightCard 数组。
+
+Task: 7
+File: YingDistribution/Views/Screens/VermilionDashboard.swift:26-29; YingDistribution/Views/Screens/VermilionDashboard.swift:267-281
+Verdict: PASS
+Notes: insightSection + insightCardsStack 作为容器，refreshInsights 在空数组时隐藏区块，有数据时逐卡渲染。
+
+Task: 7
+File: YingDistribution/Views/Screens/VermilionDashboard.swift:284-341
+Verdict: PASS
+Notes: renderInsightCard 负责卡片展示，按 severity 设置颜色、图标、标题和描述。

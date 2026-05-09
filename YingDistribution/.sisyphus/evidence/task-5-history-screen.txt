@@ -1,0 +1,19 @@
+Task: 5
+File: YingDistribution/Views/Screens/HistoryScreen.swift:47; YingDistribution/Views/Screens/HistoryScreen.swift:87-90
+Verdict: PASS
+Notes: emptyStateLabel 文案为 "No history yet"，refreshHistoryUI 根据 history 是否为空切换空态。
+
+Task: 5
+File: YingDistribution/Views/Screens/HistoryScreen.swift:118-135
+Verdict: PASS
+Notes: UITableViewDataSource 使用 viewModel.history 渲染列表，cell 展示时间、配置摘要和指标摘要。
+
+Task: 5
+File: YingDistribution/Views/Screens/HistoryScreen.swift:138-144
+Verdict: PASS
+Notes: didSelectRowAt 调用 viewModel.restoreFromHistory(record) 完成恢复，并关闭页面。
+
+Task: 5
+File: YingDistribution/Views/Screens/HistoryScreen.swift:146-163
+Verdict: PASS
+Notes: trailing swipe Delete 调用 viewModel.deleteHistoryRecord 后 refreshHistoryUI，支持删除记录。

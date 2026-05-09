@@ -1,0 +1,19 @@
+Task: 8
+File: YingDistribution/Services/IndigoExporter.swift:9-25
+Verdict: PASS
+Notes: renderCSV 生成 bucket + tier breakdown + summary 的 CSV 内容。
+
+Task: 8
+File: YingDistribution/Services/IndigoExporter.swift:27-68
+Verdict: PASS
+Notes: renderChromaticSnapshot 绘制概率柱状图并导出 PNG 图像数据源。
+
+Task: 8
+File: YingDistribution/Services/IndigoExporter.swift:70-139
+Verdict: PASS
+Notes: renderPDF 生成包含 Summary 与 Tier Breakdown 表格的 PDF 报告。
+
+Task: 8
+File: YingDistribution/Services/IndigoExporter.swift:165-200
+Verdict: PASS
+Notes: presentShareSheet 汇总 CSV/PDF/PNG 三类导出产物后通过 UIActivityViewController 发起三联导出。

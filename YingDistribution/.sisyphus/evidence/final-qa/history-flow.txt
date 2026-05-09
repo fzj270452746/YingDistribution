@@ -1,0 +1,19 @@
+Scenario
+模拟 → 自动 archive → 出现在 HistoryScreen → 选记录 restore
+
+Code Path (file:line)
+- 运行模拟入口：YingDistribution/Views/Screens/CinnabarSimulator.swift:216-226
+- 模拟完成后持久化 latest/history 并刷新内存 history：YingDistribution/ViewModels/VermilionDashboardVM.swift:58-68
+- history 记录落盘：YingDistribution/Services/CarmineArchivist.swift:149-178
+- Dashboard 打开 History：YingDistribution/Views/Screens/VermilionDashboard.swift:434-439
+- HistoryScreen 展示列表：YingDistribution/Views/Screens/HistoryScreen.swift:71-74, 111-125
+- 选择记录触发 restore：YingDistribution/Views/Screens/HistoryScreen.swift:131-135
+- restore 还原 config 并重新模拟：YingDistribution/ViewModels/VermilionDashboardVM.swift:97-107
+- 既有恢复证据引用：.sisyphus/evidence/task-11-recovery-matrix.txt:6-9
+
+Verdict
+PASS
+
+Notes
+- 静态链路完整：runTapped 调用 commenceSimulation，完成回调内同时 preserveLatest/preserveHistory，并把 history 重新加载回 VM。
+- HistoryScreen 直接消费 viewModel.history；点击 cell 后调用 restoreFromHistory，再次走 commenceSimulation，符合“选记录 restore”。

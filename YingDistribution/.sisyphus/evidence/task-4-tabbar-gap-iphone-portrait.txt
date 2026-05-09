@@ -1,0 +1,19 @@
+Task 4A: iPhone portrait visual QA
+=================================
+
+Device:
+- Booted iPhone simulator: `iPhone 17 Pro Max (E1C88709-154C-4B2F-8115-D1A6FA169A7B)`
+
+Method:
+- Launched `com.wion.YingDistribution`
+- Captured screenshot:
+  - `/var/folders/1w/02hpzkx94_q8kcx5gwzz09rr0000gn/T/opencode/tabbar-gap-shots/iphone-portrait.png`
+- Reviewed screenshot via image inspection
+
+Observed result:
+- 底部自定义 ribbon 上方未见明显异常空白带
+- 页面底部内容与 ribbon 贴合紧密，仅保留正常视觉间距
+- 未见大面积深色断层或被额外压缩的可用区域
+
+Verdict:
+- PASS

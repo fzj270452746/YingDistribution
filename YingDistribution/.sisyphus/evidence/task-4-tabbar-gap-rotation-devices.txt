@@ -1,0 +1,29 @@
+Task 4B: second-device / rotation visual QA
+==========================================
+
+Second device verification:
+- Device: `iPad (A16) (FCFD9DCD-DD94-4EAB-8588-181C10D070F1)`
+- Installed and launched `com.wion.YingDistribution`
+- Captured screenshot:
+  - `/var/folders/1w/02hpzkx94_q8kcx5gwzz09rr0000gn/T/opencode/tabbar-gap-shots/ipad-portrait.png`
+- Reviewed screenshot via image inspection
+
+Observed result on iPad portrait:
+- 底部自定义 ribbon 上方未见异常空白带
+- ribbon 与上方内容保持自然且紧凑的视觉间距
+- 卡片内容未被遮挡
+
+Rotation verification status:
+- App orientation is portrait-only by product configuration
+- Evidence:
+  - `YingDistribution/Info.plist:24-30`
+  - `UISupportedInterfaceOrientations = [UIInterfaceOrientationPortrait]`
+  - `UISupportedInterfaceOrientations_iPad = [UIInterfaceOrientationPortrait]`
+- Therefore landscape runtime verification is NOT executable in the current product configuration and is treated as N/A rather than fail.
+
+Additional screenshot:
+- `/var/folders/1w/02hpzkx94_q8kcx5gwzz09rr0000gn/T/opencode/tabbar-gap-shots/iphone-second.png`
+- Also shows no visible gap above the ribbon.
+
+Verdict:
+- PASS with documented landscape limitation (portrait-only app)

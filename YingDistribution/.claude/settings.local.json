@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xcodebuild -project YingDistribution.xcodeproj -scheme YingDistribution -destination 'platform=iOS Simulator,name=iPhone 16 Pro' build)",
+      "Bash(xcodebuild -project YingDistribution.xcodeproj -scheme YingDistribution -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.4.1' build)",
+      "Bash(xcodebuild -project /Users/hades/Desktop/Code/26/待用/77/0507-1/YingDistribution/YingDistribution.xcodeproj -scheme YingDistribution -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.4.1' build)"
+    ]
+  }
+}

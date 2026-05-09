@@ -1,0 +1,39 @@
+Task 2 — Parent Navigation & TabBar Constraint Guardrail Audit
+================================================================
+Result: PASS
+Audited file: YingDistribution/Core/MonolithNavigation.swift (107 lines, read-only)
+
+Verified anchors in concoctArchitecture() at lines 19-41:
+
+[1] contentContainer.bottomAnchor == berylRibbon.topAnchor
+    Evidence: MonolithNavigation.swift:34
+        contentContainer.bottomAnchor.constraint(equalTo: berylRibbon.topAnchor),
+    Status: UNCHANGED ✓
+
+[2] berylRibbon.bottomAnchor == view.safeAreaLayoutGuide.bottomAnchor - 8
+    Evidence: MonolithNavigation.swift:38
+        berylRibbon.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8),
+    Status: UNCHANGED ✓
+
+[3] berylRibbon height == 70
+    Evidence: MonolithNavigation.swift:28 + 39
+        let ribbonHeight: CGFloat = 70
+        berylRibbon.heightAnchor.constraint(equalToConstant: ribbonHeight)
+    Status: UNCHANGED ✓
+
+Additional notes:
+- Side anchors (leading +20 / trailing -20) on lines 36-37 unchanged.
+- contentContainer top/leading/trailing pinned to view edges (lines 31-33), so the
+  parent already supplies the entire bottom-bar reservation via line 34.
+- No alternate constraints, layout overrides, or safe-area adjustments are
+  present in this file that would alter the bottom-bar geometry.
+
+Conclusion:
+The parent navigation container (MonolithNavigation) remains the SINGLE source
+of truth for reserving space above the custom BerylRibbon tab bar. The
+guardrail invariants required by Plan Task 2 are intact. No evidence found
+that the parent container itself contributes to the reported gap; the high-
+confidence root cause therefore remains the child pages' duplicate `-100`
+bottom reservation (Task 1 scope), NOT the parent.
+
+Recommendation: PROCEED with Task 1 fix. Do NOT modify MonolithNavigation.swift.

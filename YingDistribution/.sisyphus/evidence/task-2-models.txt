@@ -1,0 +1,31 @@
+Task 2: Data Models Definition - Completion Evidence
+=====================================================
+
+Created Files:
+1. YingDistribution/Models/HistoryRecord.swift
+   - struct HistoryRecord: Codable, Identifiable
+   - Fields: id (UUID), timestamp (Date), configSummary (ConfigSummary), metricsSummary (MetricsSummary)
+   - Nested ConfigSummary: iterationQuantum, wagerAmount, cascadeMode
+   - Nested MetricsSummary: rtp, hitFrequency, evValue, maxWin, totalIterations
+
+2. YingDistribution/Models/PresetEntity.swift
+   - struct PresetEntity: Codable, Identifiable
+   - Fields: id (UUID), name (String), config (CobaltConfig), createdAt (Date)
+   - Added Codable conformance to CobaltConfig via extension
+
+3. YingDistribution/Models/ComparisonSnapshot.swift
+   - struct ComparisonSnapshot: Codable, Identifiable
+   - Fields: id (UUID), baselineRecord (HistoryRecord), comparisonRecord (HistoryRecord), createdAt (Date)
+   - Computed properties: rtpDelta, hitDelta, evDelta, maxWinDelta
+
+4. YingDistribution/Models/InsightCard.swift
+   - enum InsightSeverity: String, Codable (info, warning, success)
+   - struct InsightCard: Codable, Identifiable
+   - Fields: id (UUID), ruleId (String), title (String), description (String), severity (InsightSeverity)
+
+All models follow project conventions:
+- Pure struct types (no class, no ObservableObject)
+- Codable protocol for serialization
+- Identifiable protocol with UUID id
+- No third-party dependencies
+- Nested types for logical grouping

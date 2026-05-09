@@ -1,0 +1,17 @@
+Scenario
+坏归档不 crash + 重启恢复
+
+Code Path (file:line)
+- latest/config 解码失败返回 nil：YingDistribution/Services/CarmineArchivist.swift:23-37
+- history/presets 解码失败返回 nil：YingDistribution/Services/CarmineArchivist.swift:181-187, 216-222
+- VM restoreArchived 对 history/presets 使用 ?? [] 回退，对 latest 缺失清空 insights：YingDistribution/ViewModels/VermilionDashboardVM.swift:113-123
+- Dashboard 首次出现主动 restoreArchived，且无 metrics 时补跑默认模拟：YingDistribution/Views/Screens/VermilionDashboard.swift:43-53
+- 既有恢复矩阵引用：.sisyphus/evidence/task-11-recovery-matrix.txt:1-19
+- 既有坏归档回退引用：.sisyphus/evidence/task-11-edge-regression.txt:16-19
+
+Verdict
+PASS
+
+Notes
+- UserDefaults 归档损坏时，archivist 层统一返回 nil，不抛异常；VM 对集合态使用空数组兜底。
+- 重启/首屏进入时会 restoreArchived；若 latest 丢失，则 Dashboard 首次出现会自动跑默认模拟，应用可恢复到可操作状态而非 crash。

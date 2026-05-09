@@ -1,0 +1,20 @@
+Scenario
+保存 / 加载 / 删除 / 重名阻止（按计划不含 rename）
+
+Code Path (file:line)
+- Dashboard 打开 Presets：YingDistribution/Views/Screens/VermilionDashboard.swift:441-446
+- PresetsScreen 进入时加载 presets：YingDistribution/Views/Screens/PresetsScreen.swift:30-34
+- 保存弹窗与去空白校验：YingDistribution/Views/Screens/PresetsScreen.swift:122-149
+- VM 重名阻止：YingDistribution/ViewModels/VermilionDashboardVM.swift:77-85
+- Archivist 保存/读取 preset：YingDistribution/Services/CarmineArchivist.swift:199-222
+- 重名失败提示：YingDistribution/Views/Screens/PresetsScreen.swift:102-110, 139-143
+- 选中 preset 直接加载 activeConfig：YingDistribution/Views/Screens/PresetsScreen.swift:177-181
+- swipe Delete 删除 preset：YingDistribution/Views/Screens/PresetsScreen.swift:184-209
+- 既有重名证据引用：.sisyphus/evidence/task-11-edge-regression.txt:26-29
+
+Verdict
+PASS
+
+Notes
+- 依据计划 Assumptions line 107-108，本轮 preset 范围仅含本地保存、加载、删除、重名保护；rename 明确不在范围内。
+- 保存、加载、删除、重名阻止四段静态链路均存在，且 duplicate/empty name 都有显式提示，符合本轮 DoD 语义。

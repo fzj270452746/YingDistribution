@@ -1,0 +1,33 @@
+Task 4: Navigation Skeleton & Entry Points - COMPLETED
+
+DELIVERABLES:
+✓ HistoryScreen.swift - UIViewController skeleton with dismiss button
+✓ PresetsScreen.swift - UIViewController skeleton with dismiss button  
+✓ ComparisonScreen.swift - UIViewController skeleton with dismiss button
+✓ VermilionDashboard.swift - Modified with:
+  - 3 entry buttons (History, Presets, Compare) in horizontal row below summary
+  - Export button below entry buttons
+  - All buttons styled with GambogePalette colors and enshroud(20) radius
+  - Modal presentation via UINavigationController wrapper
+  - Export calls IndigoExporter.presentShareSheet with metrics validation
+
+IMPLEMENTATION DETAILS:
+- Entry buttons use GambogePalette.auroraViolet.withAlphaComponent(0.5)
+- Export button uses GambogePalette.emeraldSuccess.withAlphaComponent(0.5)
+- All buttons follow existing style: CinnabarTypography.slateAmpleMedium()
+- Skeleton screens: centered title label + dismiss button in top-right
+- Modal presentation: fullScreen with UINavigationController
+- Export validation: guard let metrics = viewModel.quillonMetrics
+
+CODE STRUCTURE:
+- 3 new screen files follow existing pattern (UIViewController subclass)
+- Dashboard modifications preserve existing layout hierarchy
+- entryButtonsRow added to contentStack after summaryPlaque
+- exportBtn added to contentStack after entryButtonsRow
+- All constraints properly configured
+
+VERIFICATION:
+- Syntax: All Swift files compile without errors
+- Style: Consistent with existing GambogePalette and CinnabarTypography
+- Navigation: Modal presentation with dismiss capability
+- Export: Metrics validation before share sheet presentation

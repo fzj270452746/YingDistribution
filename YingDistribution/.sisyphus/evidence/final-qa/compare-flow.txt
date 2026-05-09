@@ -1,0 +1,20 @@
+Scenario
+双选启用、单选阻止、ComparisonScreen 渲染 + tier breakdown
+
+Code Path (file:line)
+- Dashboard Compare 入口与 history<2 禁用：YingDistribution/Views/Screens/VermilionDashboard.swift:260-262, 448-452
+- ComparisonScreen 空态/选择态初始化：YingDistribution/Views/Screens/ComparisonScreen.swift:145-168
+- 单击记录分配 baseline/comparison：YingDistribution/Views/Screens/ComparisonScreen.swift:360-377
+- compareButton 仅双选时显示：YingDistribution/Views/Screens/ComparisonScreen.swift:166-167
+- compareTapped 双选 guard：YingDistribution/Views/Screens/ComparisonScreen.swift:319-324
+- 结果快照生成：YingDistribution/Views/Screens/ComparisonScreen.swift:327-333; YingDistribution/Models/ComparisonSnapshot.swift:3-23
+- ComparisonScreen 渲染 RTP/Hit/EV/Max Win 四张对比卡：YingDistribution/Views/Screens/ComparisonScreen.swift:173-221
+- Tier Breakdown 区块与行渲染：YingDistribution/Views/Screens/ComparisonScreen.swift:222-224, 287-338, 340-417
+- 既有单选阻止证据引用：.sisyphus/evidence/task-11-edge-regression.txt:21-24
+
+Verdict
+PASS
+
+Notes
+- 单选时 compareButton 隐藏，且 compareTapped 再做 guard，静态上不存在误入结果页路径。
+- 双选后生成 ComparisonSnapshot，并用 delta 字段驱动 4 张指标卡渲染；当 baseline/comparison tier summary 都存在且 delta 非空时，还会追加 Tier Breakdown 差异区块。

@@ -1,0 +1,17 @@
+{
+  "active_plan": "/Users/hades/Desktop/Code/26/待用/77/0507-1/YingDistribution/.sisyphus/plans/metric-value-truncation-fix.md",
+  "started_at": "2026-05-07T12:03:39.390Z",
+  "session_ids": [
+    "ses_1ff0d035cffekUE8v69j4wLgQT",
+    "ses_1fd9f85e2ffeC3mK13qSQIffPs",
+    "ses_1fd9f84b1ffeHQwv5LPERcr2xy"
+  ],
+  "session_origins": {
+    "ses_1ff0d035cffekUE8v69j4wLgQT": "direct",
+    "ses_1fd9f85e2ffeC3mK13qSQIffPs": "appended",
+    "ses_1fd9f84b1ffeHQwv5LPERcr2xy": "appended"
+  },
+  "plan_name": "metric-value-truncation-fix",
+  "agent": "atlas",
+  "task_sessions": {}
+}

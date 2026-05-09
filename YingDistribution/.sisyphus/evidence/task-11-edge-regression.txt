@@ -1,0 +1,34 @@
+Scenario: 1) 空 history → HistoryScreen 空态
+Code Evidence: YingDistribution/Views/Screens/HistoryScreen.swift:47; YingDistribution/Views/Screens/HistoryScreen.swift:71-74
+Verdict: PASS
+Notes: emptyStateLabel 文案为 "No history yet"，当 history 为空时显示。
+
+Scenario: 2) 空 preset → PresetsScreen 空态
+Code Evidence: YingDistribution/Views/Screens/PresetsScreen.swift:50; YingDistribution/Views/Screens/PresetsScreen.swift:74-77
+Verdict: PASS
+Notes: emptyStateLabel 文案为 "No presets saved"，当 presets 为空时显示。
+
+Scenario: 3) 空 metrics → Dashboard insight/export/compare 禁用
+Code Evidence: YingDistribution/Views/Screens/VermilionDashboard.swift:232-239; 257-263; 273-276
+Verdict: PASS
+Notes: 无 metrics 时指标占位 "—"；Export disabled(alpha=0.4)；Insights 区隐藏。Compare 在 history<2 时 disabled(alpha=0.4)。
+
+Scenario: 4) 坏归档（UserDefaults JSON 损坏）→ archivist 不 crash，回退空数组
+Code Evidence: YingDistribution/Services/CarmineArchivist.swift:182-185; 217-220; YingDistribution/ViewModels/VermilionDashboardVM.swift:115-117
+Verdict: PASS
+Notes: decode 失败返回 nil；VM 使用 ?? [] 回退，不触发崩溃。
+
+Scenario: 5) 对比仅选 1 条 → ComparisonScreen 阻止
+Code Evidence: YingDistribution/Views/Screens/ComparisonScreen.swift:166-168; 319-324
+Verdict: PASS
+Notes: compareButton 仅在 baseline+comparison 都存在时显示；compareTapped 额外 guard 双选条件。
+
+Scenario: 6) preset 重名 → 阻止保存并提示
+Code Evidence: YingDistribution/ViewModels/VermilionDashboardVM.swift:77-80; YingDistribution/Views/Screens/PresetsScreen.swift:102-110; 139-143
+Verdict: PASS
+Notes: VM 重名返回 false；UI 弹出 "Unable to Save Preset" 提示。
+
+Scenario: 7) 导出无 metrics → IndigoExporter 失败提示
+Code Evidence: YingDistribution/Services/IndigoExporter.swift:165-169; 193-196; 203-211
+Verdict: PASS
+Notes: 本任务修复：metrics=nil 或导出 items 为空时统一弹出 "Export Unavailable"，不静默失败。

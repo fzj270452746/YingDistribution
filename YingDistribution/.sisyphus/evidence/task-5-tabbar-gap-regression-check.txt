@@ -1,0 +1,43 @@
+Task 5: 抽查未受影响页面无回归
+============================================
+
+检查范围:
+- YingDistribution/Views/Screens/HistoryScreen.swift
+- YingDistribution/Views/Screens/PresetsScreen.swift
+- YingDistribution/Views/Screens/ComparisonScreen.swift
+
+检查方法: grep 底部布局相关模式（bottomAnchor / contentInset / safeArea / tabBar / -100）
+
+============================================
+本轮修复模式（受影响页面共有特征）:
+- 在 view.bottomAnchor 上手工写死 `constant: -100` 来给 tabBar 留位
+- 这种写死偏移在 safeArea 较大设备上会产生 gap
+
+============================================
+HistoryScreen.swift —— 未受影响
+- L80: tableView.bottomAnchor = view.bottomAnchor（无偏移，让 tableView 延伸到屏幕底，由 contentInset 处理边距）
+- L53: contentInset bottom: 24（与 tabBar 高度无关的内容内边距）
+- 其它 bottomAnchor 仅出现在 cell 内部布局（cardView/contentView），属 cell 自身约束
+- 结论：无 `-100` 写死偏移；tableView 直贴 view 底，tabBar 由系统 safeAreaInsets 自然处理
+
+PresetsScreen.swift —— 未受影响
+- L83: tableView.bottomAnchor = view.bottomAnchor（同 HistoryScreen 模式）
+- L56: contentInset bottom: 24
+- 其它 bottomAnchor 仅在 cell 内
+- 结论：与 HistoryScreen 同构，无回归风险
+
+ComparisonScreen.swift —— 未受影响
+- L130: compareButton.bottomAnchor = view.safeAreaLayoutGuide.bottomAnchor, -12（正确使用 safeArea，自适应 tabBar）
+- L121: tableView 顶到按钮，受 safeArea 间接保护
+- L136: resultScrollView 占用 view.bottomAnchor（结果页满屏滚动视图，符合预期）
+- 其它 bottomAnchor 均为 cell/section 内部
+- 结论：使用了 safeAreaLayoutGuide.bottomAnchor，正是本轮想推广的正确模式，无回归
+
+============================================
+为何不受当前修复影响:
+1) 三个页面均未出现 `view.bottomAnchor, constant: -100` 写死偏移模式
+2) HistoryScreen / PresetsScreen 通过 tableView 直贴 view 底 + contentInset 处理视觉边距，tabBar 区域由系统 safeArea 自然覆盖，不会出现 gap
+3) ComparisonScreen 主交互元素（compareButton）已正确锚定 safeAreaLayoutGuide.bottomAnchor，与本轮修复方向一致
+4) 本轮修复仅触及 4 个主 Tab 页面中存在 -100 偏移的实现，不涉及上述三个页面
+
+结论: 无回归。三页面底部布局逻辑健康，与 tabBar/safeArea 互动符合预期。

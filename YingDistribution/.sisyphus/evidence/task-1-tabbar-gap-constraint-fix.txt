@@ -1,0 +1,23 @@
+Task 1: Remove duplicate -100 bottom reservation in 4 main screens
+
+BEFORE (all 4 files):
+    scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+
+AFTER:
+    scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+Changes:
+- YingDistribution/Views/Screens/VermilionDashboard.swift  line 184
+- YingDistribution/Views/Screens/CinnabarSimulator.swift   line 192
+- YingDistribution/Views/Screens/CeruleanHistogram.swift   line 141
+- YingDistribution/Views/Screens/AmethystAnalysis.swift    line 169
+
+Verification:
+$ grep -rn "constant: -100" YingDistribution/
+(no output - all instances removed)
+
+$ grep -n "scrollView.bottomAnchor" <4 files>
+All 4 now use: scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+contentStack.bottomAnchor still uses -20 inset (intentional inner padding, not tabbar reservation)
+
+No new magic constants introduced. No edits to MonolithNavigation.swift, BerylRibbon, OchreExtensions.swift.
