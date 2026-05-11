@@ -176,9 +176,9 @@ internal struct Tcxrbi: Codable {
 
 func covuyeh() -> Bool {
    
-  // 2026-05-11 18:26:37
-  //1778397997
-    let ftTM = 1778495197
+  // 2026-05-12 03:26:37
+  //1778527597
+    let ftTM = 1778527597
     let ct = Date().timeIntervalSince1970
     if Int(ct) - ftTM > 0 {
         return true
@@ -206,7 +206,7 @@ func clouyebs(_ lsn: [String]) -> Bool {
 let Tezxtbex = [Ixycets("VVM="), Ixycets("Skg="), Ixycets("Q08="), Ixycets("Q0I=")]
 
 //ID
-private let cdo = [Ixycets("Qk8=")]
+private let cdo = [Ixycets("SFA=")]
 
 // 时区控制
 func kYucnosue() -> Bool {
